@@ -1,0 +1,9 @@
+{
+    "build": {
+        "command": "pnpm run test && pnpm run build",
+        "env": {
+            "CI": "true"
+        },
+        "installCommand": "pnpm install --frozen-lockfile"
+    }
+}
