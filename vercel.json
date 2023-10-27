@@ -1,9 +1,5 @@
 {
-    "build": {
-        "command": "pnpm run test && pnpm run build",
-        "env": {
-            "CI": "true"
-        },
-        "installCommand": "pnpm install --frozen-lockfile"
-    }
+    "$schema": "https://openapi.vercel.sh/vercel.json",
+    "buildCommand": "pnpm run test && pnpm run build",
+    "installCommand": "pnpm install --frozen-lockfile"
 }
