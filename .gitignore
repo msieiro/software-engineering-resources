@@ -24,3 +24,6 @@ dist-ssr
 *.sw?
 
 .env
+
+*-lock.json
+*-lock.yaml
