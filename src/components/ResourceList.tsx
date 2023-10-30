@@ -16,7 +16,10 @@ export default function ResourceList() {
     }
 
     return (
-        <section className="grid grid-cols-[repeat(auto-fill,minmax(450px,1fr))] gap-4 p-5 bg-base-100">
+        <section
+            className="grid grid-cols-[repeat(auto-fill,minmax(450px,1fr))] gap-4 p-5 bg-base-100"
+            data-testid="resources-list"
+        >
             {resources.map((el: Resource) => (
                 <ResourceCard
                     key={el.id}

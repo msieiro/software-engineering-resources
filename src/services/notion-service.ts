@@ -30,25 +30,15 @@ export const getResources = async (): Promise<Resource[]> => {
 
 const mapToResource = (page: any): Resource => {
     const { properties } = page
-    const {
-        title,
-        slug,
-        tags,
-        languages,
-        type,
-        url,
-        description,
-        lastUpdateTime
-    } = properties
+    const { title, slug, tags, languages, type, url, description } = properties
     return {
-        id: slug.rich_text[0].plain_text,
-        title: title.title[0].plain_text,
-        languages: formatMultiSelect(languages.multi_select),
-        tags: formatMultiSelect(tags.multi_select),
-        type: type.select.name,
-        description: description.rich_text[0].plain_text,
-        url: url.url,
-        lastUpdateTime: new Date(lastUpdateTime.last_edited_time)
+        id: slug.rich_text[0].plain_text ?? '',
+        title: title.title[0].plain_text ?? '',
+        languages: formatMultiSelect(languages.multi_select) ?? [],
+        tags: formatMultiSelect(tags.multi_select) ?? [],
+        type: type.select.name ?? '',
+        description: description.rich_text[0].plain_text ?? '',
+        url: url.url ?? ''
     }
 }
 
