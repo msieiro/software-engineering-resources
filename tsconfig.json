@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "allowImportingTsExtensions": true,
     "isolatedModules": true,
     "jsx": "react-jsx",
     "lib": [
@@ -10,7 +9,7 @@
     ],
     "module": "ESNext",
     /* Bundler mode */
-    "moduleResolution": "bundler",
+    "moduleResolution": "Node",
     "noEmit": true,
     "noFallthroughCasesInSwitch": true,
     "noUnusedLocals": true,
@@ -24,7 +23,7 @@
   },
   "include": [
     "src"
-  ],
+, "config"  ],
   "references": [
     {
       "path": "./tsconfig.node.json"
