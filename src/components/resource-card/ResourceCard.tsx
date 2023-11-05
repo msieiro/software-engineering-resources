@@ -38,13 +38,9 @@ export default function ResourceCard({
                 <div className="divider m-0 text-primary"></div>
                 <div className="flex flex-wrap">
                     {tags.length > 0 &&
-                        tags.map((el) => (
-                            <Badge key={el} content={el} style="primary" />
-                        ))}
+                        tags.map((el) => <Badge key={el} content={el} />)}
                     {languages.length > 0 &&
-                        languages.map((el) => (
-                            <Badge key={el} content={el} style="primary" />
-                        ))}
+                        languages.map((el) => <Badge key={el} content={el} />)}
                 </div>
                 <div className="divider m-0 text-secondary"></div>
                 <div className="inline-flex justify-end items-center">
