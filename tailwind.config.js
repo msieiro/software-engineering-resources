@@ -2,21 +2,10 @@
 export default {
     content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
     daisyui: {
-        themes: [
-            {
-                darktheme: {
-                    primary: '#6576ce',
-                    secondary: '#5e4dd1',
-                    accent: '#e5ef8b',
-                    neutral: '#322339',
-                    'base-100': '#2b3954',
-                    info: '#aab8e4',
-                    success: '#1fb26b',
-                    warning: '#d2a904',
-                    error: '#df3b30'
-                }
-            }
-        ]
+        base: true,
+        styled: true,
+        utils: true,
+        themes: ['corporate', 'night']
     },
     plugins: [require('daisyui')]
 }
