@@ -22,7 +22,7 @@ export default function ResourceList() {
 
     const showResetButton: boolean = selectedType || searchTerm ? true : false
 
-    const changeHandler = (event) => {
+    const changeHandler = (event: any) => {
         setSearchTerm(event.target.value)
     }
 
