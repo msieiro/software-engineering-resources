@@ -7,7 +7,7 @@ export default function Badge({
 }) {
     return (
         <span
-            className={`badge-sm badge-primary bg-${style} rounded m-1 font-semibold`}
+            className={`badge bg-accent-content text-accent rounded m-1 font-semibold`}
         >
             {content}
         </span>
