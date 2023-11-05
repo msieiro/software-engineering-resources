@@ -1,6 +1,6 @@
 import './App.css'
-import ResourceList from './components/ResourceList'
+import Layout from './layout/Layout'
 
 export default function App() {
-    return <ResourceList />
+    return <Layout />
 }
