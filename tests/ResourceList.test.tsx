@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react'
 import React from 'react'
 import { afterEach, describe, expect, test, vi } from 'vitest'
-import ResourceList from '../src/components/ResourceList'
+import ResourceList from '../src/components/resource-card/ResourceList'
 import * as useResourcesHook from '../src/hooks/useResources'
 import { Resource } from '../src/types/Resource'
 
@@ -12,17 +12,18 @@ describe('<ResourceList />', () => {
         useResourcesSpy.mockClear()
     })
 
-    test('should show error', () => {
+    test('should show info-alert', () => {
         const items = []
 
         useResourcesSpy.mockReturnValue({
             resources: items,
-            loading: false
+            loading: false,
+            error: ''
         })
 
         const { getByTestId } = render(<ResourceList />)
 
-        expect(getByTestId('api-error')).toBeDefined()
+        expect(getByTestId('info-alert')).toBeDefined()
     })
 
     test('should show loader', () => {
@@ -30,7 +31,8 @@ describe('<ResourceList />', () => {
 
         useResourcesSpy.mockReturnValue({
             resources: items,
-            loading: true
+            loading: true,
+            error: ''
         })
 
         const { getByTestId } = render(<ResourceList />)
@@ -53,7 +55,8 @@ describe('<ResourceList />', () => {
 
         useResourcesSpy.mockReturnValue({
             resources: items,
-            loading: false
+            loading: false,
+            error: ''
         })
 
         const { getByTestId } = render(<ResourceList />)
