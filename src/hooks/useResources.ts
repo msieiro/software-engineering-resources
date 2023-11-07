@@ -19,14 +19,14 @@ export const useResources = ({
             try {
                 const resources = await getResources(type, search)
                 setResources(resources)
-            } catch (error: any) {
+            } catch (_error) {
                 setError('Could not obtain data from NotionAPI')
             } finally {
                 setLoading(false)
             }
         }
 
-        fetchResources()
+        void fetchResources()
     }, [type, search])
 
     return { resources, loading, error }

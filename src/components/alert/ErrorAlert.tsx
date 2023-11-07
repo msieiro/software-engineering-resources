@@ -16,7 +16,7 @@ export default function ErrorAlert({ message }: { message: string }) {
                 <line x1="12" y1="8" x2="12" y2="12"></line>
                 <line x1="12" y1="16" x2="12.01" y2="16"></line>
             </svg>
-            <span data-testid="api-error">{message}</span>
+            <span data-testid="error-alert">{message}</span>
         </div>
     )
 }

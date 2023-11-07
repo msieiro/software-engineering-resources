@@ -1,4 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints'
+import { NotionPage } from '../types/Notion'
 import { Resource } from '../types/Resource'
 import { buildQueryURL } from './query-constructor'
 import { BASE_URL, REQUEST_CONFIG } from './request-constants'
@@ -14,12 +17,9 @@ export const getResources = async (
         REQUEST_CONFIG
     )
         .then((response) => response.json())
-        .then((data) => {
-            console.log(data)
-            return data
-        })
+        .then((data) => data)
 
-    return (await response).results.map((page: any) =>
-        mapResponseToResource(page)
+    return (await response).results.map((page) =>
+        mapResponseToResource(page as unknown as NotionPage)
     )
 }

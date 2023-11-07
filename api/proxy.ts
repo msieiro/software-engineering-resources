@@ -14,6 +14,7 @@ export default async (req: VercelRequest, res: VercelResponse) => {
     try {
         const typeFilter = getTypeFilter(req.query)
         const titleAndDescription = getTitleAndDescriptionFilter(req.query)
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const query: any = {
             database_id: process.env.DATABASE_ID,
             filter: {
@@ -35,7 +36,7 @@ export default async (req: VercelRequest, res: VercelResponse) => {
 }
 
 function getTypeFilter(query: VercelRequestQuery) {
-    return query.type
+    return query.type !== undefined && query.type !== ''
         ? {
               property: 'type',
               select: {
@@ -51,7 +52,7 @@ function getTypeFilter(query: VercelRequestQuery) {
 }
 
 function getTitleAndDescriptionFilter(query: VercelRequestQuery) {
-    return query.search
+    return query.search !== undefined && query.search !== ''
         ? [
               {
                   property: 'description',
