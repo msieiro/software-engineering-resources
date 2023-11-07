@@ -9,7 +9,6 @@
       "DOM.Iterable"
     ],
     "module": "ESNext",
-    /* Bundler mode */
     "moduleResolution": "Node",
     "noEmit": true,
     "noFallthroughCasesInSwitch": true,
@@ -17,17 +16,23 @@
     "noUnusedParameters": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
-    /* Linting */
     "strict": true,
     "target": "ES2020",
     "types": [
       "node"
     ],
-    "useDefineForClassFields": true
+    "useDefineForClassFields": true,
   },
   "include": [
     "src",
-    "config"
+    "tests",
+    "e2e",
+    "api",
+    ".eslintrc.cjs",
+    "vite.config.ts",
+    "postcss.config.js",
+    "prettier.config.js",
+    "tailwind.config.js"
   ],
   "references": [
     {

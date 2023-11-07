@@ -1,6 +1,6 @@
 {
     "$schema": "https://openapi.vercel.sh/vercel.json",
-    "buildCommand": "pnpm run test && pnpm run build",
+    "buildCommand": "pnpm lint && pnpm test && pnpm build",
     "functions": {
         "api/proxy.ts": {
             "runtime": "@vercel/node@3.0.7"
