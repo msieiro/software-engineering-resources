@@ -1,6 +1,7 @@
+import { MultiSelect, NotionPage } from '../types/Notion'
 import { Resource } from '../types/Resource'
 
-export const mapResponseToResource = (page: any): Resource => {
+export const mapResponseToResource = (page: NotionPage): Resource => {
     const { properties } = page
     const { title, slug, tags, languages, type, url, description } = properties
     return {
@@ -14,14 +15,14 @@ export const mapResponseToResource = (page: any): Resource => {
     }
 }
 
-const formatMultiSelect = (arr: any[]) => {
-    if (arr && arr.length > 0) {
-        const badges = arr
-            .map((el: any) => el.name)
+const formatMultiSelect = (arr: MultiSelect[]): string[] => {
+    if (arr !== undefined && arr.length > 0) {
+        const badges: string[] = arr
+            .map((el: MultiSelect) => el.name)
             .toString()
             .split(',')
 
-        if (badges && badges[0] === '') return []
+        if (badges.length > 0 && badges[0] === '') return []
 
         return badges
     }

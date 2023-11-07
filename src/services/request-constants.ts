@@ -1,4 +1,4 @@
-export const BASE_URL = '/api/proxy'
+export const BASE_URL: string = '/api/proxy'
 export const REQUEST_CONFIG: RequestInit = {
     method: 'GET',
     headers: {
