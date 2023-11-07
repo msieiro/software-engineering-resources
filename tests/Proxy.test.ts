@@ -1,6 +1,6 @@
 import { VercelRequest, VercelResponse } from '@vercel/node'
 import { describe, expect, test, vi } from 'vitest'
-import vercelFunction from '../api/proxy.ts'
+import vercelFunction from '../api/proxy'
 
 vi.mock('@notionhq/client')
 
