@@ -1,0 +1,48 @@
+name: Auto Versioning
+
+on:
+    pull_request:
+        branches:
+            - main
+        types: [closed]
+
+jobs:
+    auto-versioning:
+        if: github.event.pull_request.merged == true
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v2
+
+            - name: Set up Node.js
+              uses: actions/setup-node@v1
+              with:
+                  node-version: '18'
+
+            - name: Install dependencies
+              run: npm install
+
+            - name: Determine version increment
+              id: versioning
+              run: |
+                  BRANCH_NAME="${{ github.head_ref }}"
+                  if [[ $BRANCH_NAME == release/* ]]; then
+                    echo "::set-output name=part::major"
+                  elif [[ $BRANCH_NAME == feature/* ]]; then
+                    echo "::set-output name=part::minor"
+                  elif [[ $BRANCH_NAME == hotfix/* || $BRANCH_NAME == bugfix/* ]]; then
+                    echo "::set-output name=part::patch"
+                  else
+                    echo "::set-output name=part::none"
+                  fi
+
+            - name: Increment version
+              if: steps.versioning.outputs.part != 'none'
+              run: node versioning.js ${{ steps.versioning.outputs.part }}
+
+            - name: Push changes
+              run: |
+                  git config --local user.email "action@github.com"
+                  git config --local user.name "GitHub Action"
+                  git commit -am "Increment version [skip ci]"
+                  git push
