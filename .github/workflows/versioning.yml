@@ -19,8 +19,11 @@ jobs:
               with:
                   node-version: '18'
 
+            - name: Install pnpm
+              run: npm i -g pnpm
+
             - name: Install dependencies
-              run: npm ci
+              run: pnpm ci
 
             - name: Determine version increment
               id: versioning
@@ -44,5 +47,6 @@ jobs:
               run: |
                   git config --local user.email "action@github.com"
                   git config --local user.name "GitHub Action"
+                  git add -A 
                   git commit -am "Increment version [skip ci]"
                   git push
