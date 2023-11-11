@@ -33,7 +33,7 @@
     "vitest": "0.34.6"
   },
   "engines": {
-    "node": "18"
+    "node": "=>18"
   },
   "name": "notion-resources",
   "private": true,
@@ -46,5 +46,13 @@
     "coverage": "vitest run --coverage"
   },
   "type": "module",
-  "version": "0.2.1"
+  "version": "0.2.1",
+  "overrides": {
+    "@testing-library/react-hooks": {
+      "react": "18.2.0",
+      "react-dom": "18.2.0",
+      "@types/react": "18.2.15",
+      "@types/react-dom": "18.2.7"
+    }
+  }
 }
