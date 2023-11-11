@@ -46,7 +46,7 @@
     "coverage": "vitest run --coverage"
   },
   "type": "module",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "overrides": {
     "@testing-library/react-hooks": {
       "react": "18.2.0",
