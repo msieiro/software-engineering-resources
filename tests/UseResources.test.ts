@@ -1,4 +1,4 @@
-import { renderHook } from '@testing-library/react'
+import { renderHook } from '@testing-library/react-hooks'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { useResources } from '../src/hooks/useResources'
 import { getResources } from '../src/services/notion-service'
@@ -17,7 +17,7 @@ describe('useResources hook', () => {
         vi.restoreAllMocks()
     })
 
-    it('initial state is correct', () => {
+    it('should have the correct initial state', () => {
         vi.mocked(getResources).mockResolvedValueOnce([])
 
         const { result } = renderHook(() =>
@@ -29,12 +29,12 @@ describe('useResources hook', () => {
         expect(result.current.error).toBe('')
     })
 
-    it('sets resources after successful fetch', async () => {
+    it('should set resources after a successful fetch', async () => {
         const mockResources: Resource[] = [
             {
                 id: '1',
                 title: 'test',
-                description: 'test descs'.repeat(15),
+                description: 'test description'.repeat(15),
                 tags: ['testing'],
                 languages: ['typescript'],
                 type: 'YOUTUBE',
@@ -55,8 +55,9 @@ describe('useResources hook', () => {
         expect(result.current.error).toBe('')
     })
 
-    it('handles errors from getResources', async () => {
-        vi.mocked(getResources).mockRejectedValueOnce(new Error('Fetch error'))
+    it('should handle errors from getResources', async () => {
+        const errorMessage = 'Fetch error'
+        vi.mocked(getResources).mockRejectedValueOnce(new Error(errorMessage))
 
         const { result, waitForNextUpdate } = renderHook(() =>
             useResources({ type: 'test', search: 'query' })
@@ -70,7 +71,7 @@ describe('useResources hook', () => {
         expect(result.current.loading).toBe(false)
     })
 
-    it('calls getResources with correct parameters', async () => {
+    it('should call getResources with the correct parameters', async () => {
         vi.mocked(getResources).mockResolvedValueOnce([])
 
         const { waitForNextUpdate } = renderHook(() =>
@@ -82,7 +83,7 @@ describe('useResources hook', () => {
         expect(getResources).toHaveBeenCalledWith('testType', 'testSearch')
     })
 
-    it('does not fetch data again if the type and search have not changed', () => {
+    it('should not fetch data again if the type and search parameters have not changed', () => {
         vi.mocked(getResources).mockResolvedValueOnce([])
 
         const { rerender } = renderHook(() =>
