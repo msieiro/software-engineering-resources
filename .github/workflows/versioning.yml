@@ -38,7 +38,7 @@ jobs:
 
             - name: Increment version
               if: steps.versioning.outputs.part != 'none'
-              run: node versioning.js ${{ steps.versioning.outputs.part }}
+              run: node versioning.cjs ${{ steps.versioning.outputs.part }}
 
             - name: Push changes
               run: |
