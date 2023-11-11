@@ -23,7 +23,7 @@ jobs:
               run: npm i -g pnpm
 
             - name: Install dependencies
-              run: pnpm ci
+              run: pnpm install --frozen-lockfile
 
             - name: Determine version increment
               id: versioning
