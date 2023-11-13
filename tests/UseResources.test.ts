@@ -21,7 +21,7 @@ describe('useResources hook', () => {
         vi.mocked(getResources).mockResolvedValueOnce([])
 
         const { result } = renderHook(() =>
-            useResources({ type: '', search: '' })
+            useResources({ type: '', search: '', tags: [], languages: [] })
         )
 
         expect(result.current.resources).toEqual([])
@@ -45,7 +45,12 @@ describe('useResources hook', () => {
         vi.mocked(getResources).mockResolvedValueOnce(mockResources)
 
         const { result, waitForNextUpdate } = renderHook(() =>
-            useResources({ type: 'YOUTUBE', search: 'test' })
+            useResources({
+                type: 'YOUTUBE',
+                search: 'test',
+                tags: [],
+                languages: []
+            })
         )
 
         await waitForNextUpdate()
@@ -60,7 +65,12 @@ describe('useResources hook', () => {
         vi.mocked(getResources).mockRejectedValueOnce(new Error(errorMessage))
 
         const { result, waitForNextUpdate } = renderHook(() =>
-            useResources({ type: 'test', search: 'query' })
+            useResources({
+                type: 'test',
+                search: 'query',
+                tags: [],
+                languages: []
+            })
         )
 
         await waitForNextUpdate()
@@ -75,7 +85,12 @@ describe('useResources hook', () => {
         vi.mocked(getResources).mockResolvedValueOnce([])
 
         const { waitForNextUpdate } = renderHook(() =>
-            useResources({ type: 'testType', search: 'testSearch' })
+            useResources({
+                type: 'testType',
+                search: 'testSearch',
+                tags: [],
+                languages: []
+            })
         )
 
         await waitForNextUpdate()
@@ -87,7 +102,12 @@ describe('useResources hook', () => {
         vi.mocked(getResources).mockResolvedValueOnce([])
 
         const { rerender } = renderHook(() =>
-            useResources({ type: 'test', search: 'query' })
+            useResources({
+                type: 'test',
+                search: 'query',
+                tags: [],
+                languages: []
+            })
         )
 
         rerender({ type: 'test', search: 'query' })
