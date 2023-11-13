@@ -2,7 +2,13 @@
     "$schema": "https://openapi.vercel.sh/vercel.json",
     "buildCommand": "pnpm lint && pnpm test && pnpm build",
     "functions": {
-        "api/proxy.ts": {
+        "api/languages.ts": {
+            "runtime": "@vercel/node@3.0.7"
+        },
+        "api/query.ts": {
+            "runtime": "@vercel/node@3.0.7"
+        },
+        "api/tags.ts": {
             "runtime": "@vercel/node@3.0.7"
         }
     },
