@@ -14,6 +14,9 @@ export default async (req: VercelRequest, res: VercelResponse) => {
     try {
         const typeFilter = getTypeFilter(req.query)
         const titleAndDescription = getTitleAndDescriptionFilter(req.query)
+        const tags = getTagsFilter(req.query)
+        const languages = getLanguagesFilter(req.query)
+        console.log(tags, languages)
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const query: any = {
             database_id: process.env.DATABASE_ID,
@@ -28,11 +31,44 @@ export default async (req: VercelRequest, res: VercelResponse) => {
             ]
         }
         const result = await notion.databases.query(query)
-        console.log(result)
         res.status(200).send(result)
     } catch (error) {
         res.status(500).send('Internal Server Error')
     }
+}
+
+function getLanguagesFilter(query: VercelRequestQuery) {
+    //AWS,Algorithms,Animations,Automatization
+    return query.languages !== undefined && query.languages !== ''
+        ? {
+              property: 'languages',
+              select: {
+                  equals: query.languages
+              }
+          }
+        : {
+              property: 'languages',
+              select: {
+                  is_not_empty: true
+              }
+          }
+}
+
+function getTagsFilter(query: VercelRequestQuery) {
+    //Java,Javascript,Typescript
+    return query.tags !== undefined && query.tags !== ''
+        ? {
+              property: 'tags',
+              select: {
+                  equals: query.tags
+              }
+          }
+        : {
+              property: 'tags',
+              select: {
+                  is_not_empty: true
+              }
+          }
 }
 
 function getTypeFilter(query: VercelRequestQuery) {
