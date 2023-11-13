@@ -16,12 +16,16 @@ export default async (req: VercelRequest, res: VercelResponse) => {
         const titleAndDescription = getTitleAndDescriptionFilter(req.query)
         const tags = getTagsFilter(req.query)
         const languages = getLanguagesFilter(req.query)
-        console.log(tags, languages)
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const query: any = {
             database_id: process.env.DATABASE_ID,
             filter: {
-                and: [typeFilter, { or: [...titleAndDescription] }]
+                and: [
+                    typeFilter,
+                    ...tags,
+                    ...languages,
+                    { or: [...titleAndDescription] }
+                ]
             },
             sorts: [
                 {
@@ -30,6 +34,7 @@ export default async (req: VercelRequest, res: VercelResponse) => {
                 }
             ]
         }
+        console.log(JSON.stringify(query))
         const result = await notion.databases.query(query)
         res.status(200).send(result)
     } catch (error) {
@@ -38,37 +43,47 @@ export default async (req: VercelRequest, res: VercelResponse) => {
 }
 
 function getLanguagesFilter(query: VercelRequestQuery) {
-    //AWS,Algorithms,Animations,Automatization
-    return query.languages !== undefined && query.languages !== ''
-        ? {
-              property: 'languages',
-              select: {
-                  equals: query.languages
-              }
-          }
-        : {
-              property: 'languages',
-              select: {
-                  is_not_empty: true
-              }
-          }
+    if (query.languages !== undefined && query.languages !== '') {
+        const languagesArr = query.languages.toString().split(',')
+        const mappedLanguages = languagesArr.map((lang: string) => ({
+            property: 'languages',
+            multi_select: {
+                contains: lang
+            }
+        }))
+        console.log(mappedLanguages)
+        if (mappedLanguages.length > 0) return mappedLanguages
+    }
+    return [
+        {
+            property: 'languages',
+            multi_select: {
+                is_not_empty: true
+            }
+        }
+    ]
 }
 
 function getTagsFilter(query: VercelRequestQuery) {
-    //Java,Javascript,Typescript
-    return query.tags !== undefined && query.tags !== ''
-        ? {
-              property: 'tags',
-              select: {
-                  equals: query.tags
-              }
-          }
-        : {
-              property: 'tags',
-              select: {
-                  is_not_empty: true
-              }
-          }
+    if (query.tags !== undefined && query.tags !== '') {
+        const tagsArr = query.tags.toString().split(',')
+        const mappedTags = tagsArr.map((tag: string) => ({
+            property: 'tags',
+            multi_select: {
+                contains: tag
+            }
+        }))
+        console.log(mappedTags)
+        if (mappedTags.length > 0) return mappedTags
+    }
+    return [
+        {
+            property: 'tags',
+            multi_select: {
+                is_not_empty: true
+            }
+        }
+    ]
 }
 
 function getTypeFilter(query: VercelRequestQuery) {
