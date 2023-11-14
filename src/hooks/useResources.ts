@@ -4,10 +4,14 @@ import { Resource } from '../types/Resource'
 
 export const useResources = ({
     type,
-    search
+    search,
+    tags,
+    languages
 }: {
     type: string
     search: string
+    tags: string[]
+    languages: string[]
 }) => {
     const [resources, setResources] = useState<Resource[]>([])
     const [loading, setLoading] = useState<boolean>(true)
@@ -17,7 +21,12 @@ export const useResources = ({
         const fetchResources = async () => {
             setLoading(true)
             try {
-                const resources = await getResources(type, search)
+                const resources = await getResources(
+                    type,
+                    search,
+                    tags,
+                    languages
+                )
                 setResources(resources)
             } catch (_error) {
                 setError('Could not obtain data from NotionAPI')
@@ -27,7 +36,7 @@ export const useResources = ({
         }
 
         void fetchResources()
-    }, [type, search])
+    }, [type, search, tags, languages])
 
     return { resources, loading, error }
 }

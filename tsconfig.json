@@ -27,8 +27,6 @@
     "src",
     "tests",
     "e2e",
-    "api",
-    ".eslintrc.cjs",
     "vite.config.ts",
     "postcss.config.js",
     "prettier.config.js",

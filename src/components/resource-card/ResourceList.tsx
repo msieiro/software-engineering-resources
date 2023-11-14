@@ -10,9 +10,13 @@ import ResourceCard from './ResourceCard'
 export default function ResourceList() {
     const [selectedType, setSelectedType] = useState<string>('')
     const [searchTerm, setSearchTerm] = useState<string>('')
+    const [tagFilter, setTagFilter] = useState<string[]>([])
+    const [languagesFilter, setLanguagesFilter] = useState<string[]>([])
     const { resources, loading, error } = useResources({
         type: selectedType,
-        search: searchTerm
+        search: searchTerm,
+        tags: tagFilter,
+        languages: languagesFilter
     })
 
     return (
@@ -21,8 +25,11 @@ export default function ResourceList() {
                 <FilterForm
                     selectedType={selectedType}
                     setSelectedType={setSelectedType}
-                    searchTerm={searchTerm}
                     setSearchTerm={setSearchTerm}
+                    tagFilter={tagFilter}
+                    setTagFilter={setTagFilter}
+                    languagesFilter={languagesFilter}
+                    setLanguagesFilter={setLanguagesFilter}
                 />
             </section>
             {loading && <Loader />}
