@@ -7,7 +7,7 @@ module.exports = {
         'plugin:@typescript-eslint/recommended-requiring-type-checking',
         'plugin:react-hooks/recommended'
     ],
-    ignorePatterns: ['dist', 'build', '.eslintrc.js', 'api/*.ts'],
+    ignorePatterns: ['dist', 'build', '.eslintrc.cjs', 'api/*.ts'],
     parser: '@typescript-eslint/parser',
     parserOptions: {
         ecmaVersion: 11,
