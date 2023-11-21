@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-return */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints'
 import { BASE_URL, REQUEST_CONFIG } from '../constants/request-constants'
 import { NotionPage } from '../types/Notion'
